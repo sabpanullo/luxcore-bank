@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxCore - Seu Banco Digital Mágico</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   
+    <div class="magic-stars" id="magicStars"></div>
+
+    <!-- Tela de Login -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-header">
+            <div class="login-logo">LuxCore</div>
+            <div class="login-subtitle">Sua experiência bancária premium</div>
+        </div>
+        <form id="loginForm" class="login-form">
+            <div class="form-group">
+                <label class="form-label">CPF</label>
+                <input type="text" id="loginCPF" class="login-input" placeholder="Digite seu CPF" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Senha</label>
+                <input type="password" id="loginPassword" class="login-input" placeholder="Digite sua senha" required>
+            </div>
+            <button type="submit" class="login-btn mirror-effect">Entrar</button>
+        </form>
+        <div class="login-footer">
+            <p>Não tem conta? <a href="#" id="showRegister">Cadastre-se</a></p>
+            <div class="test-info">
+                <p><strong>Para teste use:</strong></p>
+                <p>CPF: <strong>123.456.789-00</strong></p>
+                <p>Senha: <strong>12345</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela de Cadastro -->
+    <div id="registerScreen" class="login-container" style="display: none;">
+        <div class="login-header">
+            <div class="login-logo">LuxCore</div>
+            <div class="login-subtitle">Crie sua conta</div>
+        </div>
+        <form id="registerForm" class="login-form">
+            <div class="form-group">
+                <label class="form-label">Nome completo</label>
+                <input type="text" id="registerName" class="login-input" placeholder="Digite seu nome completo" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">CPF</label>
+                <input type="text" id="registerCPF" class="login-input" placeholder="Digite seu CPF" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">E-mail</label>
+                <input type="email" id="registerEmail" class="login-input" placeholder="Digite seu e-mail" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Senha</label>
+                <input type="password" id="registerPassword" class="login-input" placeholder="Crie uma senha" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Saldo inicial</label>
+                <input type="number" id="initialBalance" class="login-input" placeholder="Digite o saldo inicial" min="0" step="0.01" required>
+            </div>
+            <button type="submit" class="login-btn mirror-effect">Cadastrar</button>
+        </form>
+        <div class="login-footer">
+            <p>Já tem conta? <a href="#" id="showLogin">Fazer login</a></p>
+        </div>
+    </div>
+
+    <!-- Aplicação Principal -->
+    <div id="appScreen" class="container" style="display: none;">
+        <header>
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo">LuxCore</div>
+                    <div class="tagline">Sua experiência bancária premium</div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="app-container">
+           
+            <div class="panel user-panel">
+                <div class="user-info">
+                    <div class="avatar" id="userAvatar">LH</div>
+                    <div class="user-details">
+                        <h3 id="userName">Larissa Harumy Higa</h3>
+                        <div class="balance" id="userBalance">R$ 1.500,00</div>
+                    </div>
+                </div>
+                
+                
+                <div class="operations-container">
+                    <div class="operations">
+                        <button class="operation-btn mirror-effect" data-action="pix">
+                            <span class="btn-icon">🏦</span>
+                            <span class="btn-text">PIX</span>
+                        </button>
+                        <button class="operation-btn mirror-effect" data-action="card">
+                            <span class="btn-icon">💳</span>
+                            <span class="btn-text">Cartão</span>
+                        </button>
+                        <button class="operation-btn mirror-effect" data-action="transfer">
+                            <span class="btn-icon">➡️</span>
+                            <span class="btn-text">Transferir</span>
+                        </button>
+                        <button class="operation-btn mirror-effect" data-action="payment">
+                            <span class="btn-icon">💰</span>
+                            <span class="btn-text">Pagamentos</span>
+                        </button>
+                        <button class="operation-btn mirror-effect" data-action="loan">
+                            <span class="btn-icon">📊</span>
+                            <span class="btn-text">Empréstimo</span>
+                        </button>
+                        <button class="operation-btn mirror-effect" data-action="investment">
+                            <span class="btn-icon">📈</span>
+                            <span class="btn-text">Investir</span>
+                        </button>
+                        
+                        <button class="operation-btn mirror-effect" data-action="extract">
+                            <span class="btn-icon">📋</span>
+                            <span class="btn-text">Extrato</span>
+                        </button>
+                        <button class="operation-btn mirror-effect logout-operation" id="logoutBtn">
+                            <span class="btn-icon">🚪</span>
+                            <span class="btn-text">Sair</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="panel dashboard">
+                <div class="dashboard-section">
+                    <h2 class="section-title">Visão Geral</h2>
+                    <div class="cards-container">
+                        <div class="card balance-card">
+                            <div class="card-icon">💎</div>
+                            <div class="card-content">
+                                <div class="card-title">Saldo Disponível</div>
+                                <div class="card-value" id="availableBalance">R$ 1.500,00</div>
+                            </div>
+                        </div>
+                        <div class="card bills-card">
+                            <div class="card-icon">📄</div>
+                            <div class="card-content">
+                                <div class="card-title">Contas a Pagar</div>
+                                <div class="card-value" id="billsToPay">R$ 100,00</div>
+                            </div>
+                        </div>
+                        <div class="card investment-card">
+                            <div class="card-icon">📈</div>
+                            <div class="card-content">
+                                <div class="card-title">Investimentos</div>
+                                <div class="card-value" id="investments">R$ 1.000,00</div>
+                            </div>
+                        </div>
+                        <div class="card loan-card">
+                            <div class="card-icon">🏦</div>
+                            <div class="card-content">
+                                <div class="card-title">Empréstimos</div>
+                                <div class="card-value" id="loans">R$ 5.000,00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-section">
+                    <h2 class="section-title">Últimas Transações</h2>
+                    <div class="transactions">
+                        <div class="transaction-list" id="transactionList">
+                            <!-- Transações serão carregadas aqui -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para PIX -->
+    <div id="pixModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Área PIX</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="pix-options">
+                <button class="pix-option-btn mirror-effect" data-pix-action="transfer">
+                    <span class="pix-icon">➡️</span>
+                    <span>Fazer PIX</span>
+                </button>
+                <button class="pix-option-btn mirror-effect" data-pix-action="receive">
+                    <span class="pix-icon">⬅️</span>
+                    <span>Receber PIX</span>
+                </button>
+                <button class="pix-option-btn mirror-effect" data-pix-action="keys">
+                    <span class="pix-icon">🔑</span>
+                    <span>Minhas Chaves</span>
+                </button>
+                <button class="pix-option-btn mirror-effect" data-pix-action="history">
+                    <span class="pix-icon">📋</span>
+                    <span>Histórico PIX</span>
+                </button>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary close-modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Cartão -->
+    <div id="cardModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Cartão Virtual LuxCore</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="card-display">
+                <div class="virtual-card-luxcore">
+                    <div class="card-top">
+                        <div class="card-logo">LuxCore</div>
+                        <div class="card-chip"></div>
+                    </div>
+                    <div class="card-number" id="cardNumberDisplay">•••• •••• •••• 1234</div>
+                    <div class="card-bottom">
+                        <div class="card-holder">
+                            <div class="card-label">Titular</div>
+                            <div class="card-value" id="cardHolderDisplay">LARISSA HIGA</div>
+                        </div>
+                        <div class="card-expiry">
+                            <div class="card-label">Validade</div>
+                            <div class="card-value" id="cardExpiryDisplay">12/28</div>
+                        </div>
+                    </div>
+                    <div class="card-brand">VISA</div>
+                </div>
+            </div>
+            <div class="card-actions">
+                <button class="card-action-btn mirror-effect" data-card-action="show">
+                    <span>👁️ Mostrar Dados</span>
+                </button>
+                <button class="card-action-btn mirror-effect" data-card-action="copy">
+                    <span>📋 Copiar Número</span>
+                </button>
+                <button class="card-action-btn mirror-effect" data-card-action="block">
+                    <span>🚫 Bloquear Cartão</span>
+                </button>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary close-modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Transferência -->
+    <div id="transferModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Transferência</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="transferForm">
+                <div class="form-group">
+                    <label class="form-label">CPF do Destinatário</label>
+                    <input type="text" class="form-input" id="recipientCPF" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Valor</label>
+                    <input type="number" class="form-input" id="transferAmount" min="0.01" step="0.01" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary close-modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary mirror-effect">Transferir</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para Pagamento -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Pagamento</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="paymentForm">
+                <div class="form-group">
+                    <label class="form-label">Descrição</label>
+                    <input type="text" class="form-input" id="paymentDescription" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Valor</label>
+                    <input type="number" class="form-input" id="paymentAmount" min="0.01" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Data de Vencimento</label>
+                    <input type="date" class="form-input" id="paymentDueDate" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary close-modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary mirror-effect">Pagar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para Empréstimo -->
+    <div id="loanModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Solicitar Empréstimo</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="loanForm">
+                <div class="form-group">
+                    <label class="form-label">Valor do Empréstimo</label>
+                    <input type="number" class="form-input" id="loanAmount" min="100" step="100" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Número de Parcelas</label>
+                    <select class="form-input" id="loanInstallments" required>
+                        <option value="6">6 meses</option>
+                        <option value="12" selected>12 meses</option>
+                        <option value="24">24 meses</option>
+                        <option value="36">36 meses</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <p class="calculation-result">Taxa de juros: 2% ao mês</p>
+                    <p class="calculation-result" id="loanCalculation">Valor da parcela: R$ 0,00</p>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary close-modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary mirror-effect">Solicitar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para Investimento -->
+    <div id="investmentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Aplicar Investimento</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="investmentForm">
+                <div class="form-group">
+                    <label class="form-label">Valor do Investimento</label>
+                    <input type="number" class="form-input" id="investmentAmount" min="100" step="100" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tipo de Investimento</label>
+                    <select class="form-input" id="investmentType" required>
+                        <option value="conservador" selected>Conservador (0,5% ao mês)</option>
+                        <option value="moderado">Moderado (0,8% ao mês)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <p class="calculation-result" id="investmentEarnings">Rendimento estimado após 12 meses: R$ 0,00</p>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary close-modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary mirror-effect">Aplicar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para Extrato -->
+    <div id="extractModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Extrato Financeiro</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div id="extractContent" class="extract-content">
+                <!-- Conteúdo do extrato será carregado aqui -->
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary close-modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificação -->
+    <div id="notification" class="notification">
+        <span id="notificationMessage">Operação realizada com sucesso!</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
